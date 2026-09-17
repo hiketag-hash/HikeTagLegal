@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Susține HikeTag</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; max-width: 640px; margin: 0 auto; padding: 32px 20px 60px; line-height: 1.6; color: #1a1a1a; }
+  h1 { color: #0d5747; font-size: 30px; margin-bottom: 6px; }
+  .sub { color: #666; margin-top: 0; margin-bottom: 28px; font-size: 15px; }
+  h2 { color: #0d5747; font-size: 17px; margin-top: 36px; }
+  a { color: #0d5747; }
+
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: #0d5747; color: #fff; text-decoration: none;
+    padding: 17px 20px; border-radius: 14px; font-size: 17px; font-weight: 700;
+    border: none; width: 100%; cursor: pointer; font-family: inherit;
+  }
+  .btn:hover { background: #0a4537; }
+  .btn.secondary { background: #f2f5f3; color: #0d5747; border: 1.5px solid #d6e0da; font-size: 15px; padding: 14px 20px; margin-top: 10px; }
+  .btn.secondary:hover { background: #e8efeb; }
+  .btn[hidden] { display: none; }
+
+  .card { background: #f6f8f7; border: 1px solid #e6e9e7; border-radius: 16px; padding: 22px; margin: 22px 0; }
+  .muted { color: #6b7280; font-size: 14px; }
+  .qr-wrap { text-align: center; margin-top: 10px; }
+  .qr-wrap img { border-radius: 12px; border: 1px solid #e6e9e7; padding: 10px; background: #fff; }
+  ul { padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  footer { margin-top: 48px; font-size: 13px; color: #777; border-top: 1px solid #eee; padding-top: 18px; }
+  .status { font-size: 14px; color: #6b7280; padding: 14px 0; }
+  .status.error { color: #b45309; }
+</style>
+</head>
+<body>
+
+<h1>Susține HikeTag</h1>
+<p class="sub">
+  HikeTag e făcut și ținut în viață de un singur om, nu de o firmă. Dacă aplicația ți-a fost de
+  folos și vrei să ajuți, poți dona cât consideri — orice sumă contează și nimic nu e obligatoriu.
+</p>
+
+<div class="card">
+  <!-- Linkul vine din panoul de admin (setarea donation.revolut_url), ca sa poata fi schimbat
+       fara o versiune noua de aplicatie si fara a reedita pagina asta. -->
+  <div id="status" class="status">Se încarcă...</div>
+
+  <a id="revolut-btn" class="btn" href="#" hidden rel="noopener">
+    Donează prin Revolut
+  </a>
+
+  <button id="copy-btn" class="btn secondary" hidden>Copiază linkul</button>
+
+  <div id="qr" class="qr-wrap" hidden>
+    <p class="muted" style="margin-bottom:10px">Ești pe calculator? Scanează cu telefonul:</p>
+    <img id="qr-img" alt="Cod QR pentru donație" width="200" height="200">
+  </div>
+</div>
+
+<h2>La ce se duc banii</h2>
+<ul>
+  <li>serverul pe care rulează aplicația și baza de date;</li>
+  <li>domeniul și certificatele;</li>
+  <li>taxele anuale cerute de Google Play și App Store;</li>
+  <li>serviciile externe folosite de aplicație (hărți, notificări).</li>
+</ul>
+<p class="muted">
+  HikeTag nu are reclame, nu vinde date și nu are abonamente. Donațiile nu îți dau niciun
+  avantaj în aplicație — rămâne la fel pentru toată lumea.
+</p>
+
+<h2>Întrebări</h2>
+<p class="muted">
+  Pentru orice nelămurire: <a href="mailto:hiketag@gmail.com">hiketag@gmail.com</a>.
+  Vezi și <a href="/legal/">documentele legale</a>.
+</p>
+
+<footer>
+  HikeTag este operată de Alexandru Tabara, persoană fizică.
+</footer>
+
+<script>
+  // Configurarea vine de la API, nu e scrisa in pagina: asa linkul se schimba din admin,
+  // dintr-un singur loc, fara sa fie nevoie de un deploy nou al site-ului.
+  var API = 'https://api.hiketag.ro/api/app-settings/public';
+
+  var statusEl = document.getElementById('status');
+  var btn = document.getElementById('revolut-btn');
+  var copyBtn = document.getElementById('copy-btn');
+  var qr = document.getElementById('qr');
+  var qrImg = document.getElementById('qr-img');
+
+  function showError(msg) {
+    statusEl.className = 'status error';
+    statusEl.textContent = msg;
+  }
+
+  fetch(API)
+    .then(function (r) {
+      // 404 = API-ul de pe server nu cunoaste inca setarea. Nu e o eroare de retea, ci pur si
+      // simplu o configurare care nu exista, asa ca lasam mesajul de mai jos sa o spuna.
+      if (r.status === 404) return null;
+      return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status));
+    })
+    .then(function (cfg) {
+      var url = cfg && cfg.donationUrl;
+      if (!url) {
+        showError('Metoda de donație nu este configurată încă. Revino puțin mai târziu.');
+        return;
+      }
+
+      statusEl.hidden = true;
+      btn.href = url;
+      btn.hidden = false;
+      copyBtn.hidden = false;
+
+      // QR-ul e util doar pe ecran mare — pe telefon nu ai cum sa-ti scanezi propriul ecran.
+      if (window.matchMedia('(min-width: 700px)').matches) {
+        qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(url);
+        qr.hidden = false;
+      }
+
+      copyBtn.addEventListener('click', function () {
+        // .catch obligatoriu: scrierea in clipboard e refuzata in unele contexte (permisiune
+        // blocata, pagina deschisa direct de pe disc). Fara el, eroarea ramane nerezolvata
+        // si butonul pare pur si simplu mort, fara sa spuna nimic.
+        navigator.clipboard.writeText(url).then(function () {
+          copyBtn.textContent = 'Link copiat';
+          setTimeout(function () { copyBtn.textContent = 'Copiază linkul'; }, 2000);
+        }).catch(function () {
+          copyBtn.textContent = 'Copiază manual din bara de adrese';
+          setTimeout(function () { copyBtn.textContent = 'Copiază linkul'; }, 3000);
+        });
+      });
+    })
+    .catch(function () {
+      showError('Nu am putut încărca metoda de donație. Încearcă să reîncarci pagina.');
+    });
+</script>
+
+</body>
+</html>

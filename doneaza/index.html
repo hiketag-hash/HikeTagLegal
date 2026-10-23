@@ -4,193 +4,631 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Susține HikeTag</title>
+		<meta
+			name="description"
+			content="HikeTag e construit de un singur om, fără firmă și fără investitori. Dacă îți e drag, poți susține comunitatea."
+		/>
+		<meta property="og:title" content="Susține comunitatea HikeTag" />
+		<meta
+			property="og:description"
+			content="Fiecare pas contează. Construiește comunitatea cu noi!"
+		/>
+		<meta
+			property="og:image"
+			content="https://www.hiketag.ro/doneaza/sustine-comunitatea.jpg"
+		/>
 		<style>
+			:root {
+				--green: #1e7a48;
+				--green-deep: #0d5747;
+				--green-soft: #e8f4ec;
+				--bg: #f4f8f5;
+				--surface: #ffffff;
+				--paper: #fffdf6;
+				--paper-line: #efe6cf;
+				--text: #17211b;
+				--text-2: #4b5a51;
+				--text-3: #7b8a81;
+				--border: #e1ebe4;
+				--shadow: 0 10px 30px rgba(30, 122, 72, 0.12);
+			}
+			@media (prefers-color-scheme: dark) {
+				:root {
+					--green: #3fae6f;
+					--green-deep: #86d4a6;
+					--green-soft: #17271e;
+					--bg: #0f1512;
+					--surface: #17201b;
+					--paper: #1b231e;
+					--paper-line: #2c372f;
+					--text: #eef4f0;
+					--text-2: #b7c5bc;
+					--text-3: #85958b;
+					--border: #24322a;
+					--shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+				}
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+			html {
+				scroll-behavior: smooth;
+			}
 			body {
+				margin: 0;
+				background: var(--bg);
+				color: var(--text);
 				font-family:
 					-apple-system,
 					Segoe UI,
 					Roboto,
 					Arial,
 					sans-serif;
-				max-width: 640px;
-				margin: 0 auto;
-				padding: 32px 20px 60px;
 				line-height: 1.6;
-				color: #1a1a1a;
+				-webkit-font-smoothing: antialiased;
 			}
-			h1 {
-				color: #0d5747;
-				font-size: 30px;
-				margin-bottom: 6px;
-			}
-			.sub {
-				color: #666;
-				margin-top: 0;
-				margin-bottom: 28px;
-				font-size: 15px;
-			}
-			h2 {
-				color: #0d5747;
-				font-size: 17px;
-				margin-top: 36px;
+			.wrap {
+				max-width: 720px;
+				margin: 0 auto;
+				padding: 20px 16px 56px;
 			}
 			a {
-				color: #0d5747;
+				color: var(--green);
+			}
+			[hidden] {
+				display: none !important;
 			}
 
+			/* ── Sus: desenul ── */
+			.hero {
+				display: block;
+				border-radius: 24px;
+				overflow: hidden;
+				box-shadow: var(--shadow);
+			}
+			.hero img {
+				display: block;
+				width: 100%;
+				height: auto;
+			}
+
+			/* ── Caseta de susținere, lipită sub desen ── */
+			.give {
+				position: relative;
+				margin: -34px 12px 0;
+				padding: 26px 22px 24px;
+				border-radius: 24px;
+				background:
+					radial-gradient(
+						120% 140% at 100% 0%,
+						rgba(255, 255, 255, 0.16),
+						transparent 55%
+					),
+					linear-gradient(140deg, #1e7a48, #0d5747);
+				color: #fff;
+				box-shadow: 0 16px 40px rgba(13, 87, 71, 0.35);
+				text-align: center;
+			}
+			.eyebrow {
+				display: inline-block;
+				background: rgba(255, 255, 255, 0.16);
+				color: #fff;
+				font-size: 12px;
+				font-weight: 800;
+				letter-spacing: 0.6px;
+				text-transform: uppercase;
+				padding: 5px 12px;
+				border-radius: 999px;
+			}
+			.give h1 {
+				font-size: clamp(28px, 6.5vw, 38px);
+				line-height: 1.15;
+				letter-spacing: -0.6px;
+				margin: 12px 0 8px;
+			}
+			.give .give-sub {
+				margin: 0 auto 20px;
+				max-width: 440px;
+				color: rgba(255, 255, 255, 0.88);
+				font-size: 16px;
+			}
 			.btn {
-				display: flex;
+				display: inline-flex;
 				align-items: center;
 				justify-content: center;
 				gap: 10px;
-				background: #0d5747;
-				color: #fff;
-				text-decoration: none;
-				padding: 17px 20px;
-				border-radius: 14px;
-				font-size: 17px;
-				font-weight: 700;
-				border: none;
 				width: 100%;
+				max-width: 380px;
+				padding: 16px 24px;
+				border-radius: 999px;
+				border: none;
+				background: #fff;
+				color: #0d5747;
+				font: inherit;
+				font-size: 17px;
+				font-weight: 800;
+				text-decoration: none;
 				cursor: pointer;
-				font-family: inherit;
+				box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+				transition:
+					transform 0.15s ease,
+					box-shadow 0.15s ease;
 			}
 			.btn:hover {
-				background: #0a4537;
+				transform: translateY(-2px);
+				box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
 			}
-			.btn.secondary {
-				background: #f2f5f3;
-				color: #0d5747;
-				border: 1.5px solid #d6e0da;
-				font-size: 15px;
-				padding: 14px 20px;
+			.btn:active {
+				transform: translateY(0);
+			}
+			.btn svg {
+				flex-shrink: 0;
+			}
+			.btn.ghost {
 				margin-top: 10px;
+				background: transparent;
+				color: #fff;
+				border: 1.5px solid rgba(255, 255, 255, 0.45);
+				box-shadow: none;
+				font-size: 15px;
+				font-weight: 700;
+				padding: 12px 20px;
 			}
-			.btn.secondary:hover {
-				background: #e8efeb;
+			.btn.ghost:hover {
+				background: rgba(255, 255, 255, 0.1);
+				transform: none;
 			}
-			.btn[hidden] {
-				display: none;
+			.safe {
+				margin: 14px 0 0;
+				font-size: 13px;
+				color: rgba(255, 255, 255, 0.78);
 			}
-
-			.card {
-				background: #f6f8f7;
-				border: 1px solid #e6e9e7;
-				border-radius: 16px;
-				padding: 22px;
-				margin: 22px 0;
-			}
-			.muted {
-				color: #6b7280;
-				font-size: 14px;
+			.status {
+				font-size: 14.5px;
+				color: rgba(255, 255, 255, 0.88);
+				padding: 10px 0;
 			}
 			.qr-wrap {
-				text-align: center;
-				margin-top: 10px;
+				margin-top: 18px;
+			}
+			.qr-wrap p {
+				margin: 0 0 10px;
+				font-size: 13.5px;
+				color: rgba(255, 255, 255, 0.8);
 			}
 			.qr-wrap img {
-				border-radius: 12px;
-				border: 1px solid #e6e9e7;
+				border-radius: 16px;
 				padding: 10px;
 				background: #fff;
 			}
-			ul {
-				padding-left: 20px;
+
+			/* ── Scrisoarea lui Alex: ca o carte poștală de pe traseu ── */
+			.letter {
+				position: relative;
+				margin: 30px 0 0;
+				padding: 26px 22px 22px;
+				background: var(--paper);
+				border: 1px solid var(--paper-line);
+				border-radius: 22px;
+				box-shadow: var(--shadow);
+				color: var(--text-2);
+				font-size: 16px;
 			}
-			li {
-				margin-bottom: 6px;
+			.stamp {
+				position: absolute;
+				top: -14px;
+				right: 18px;
+				width: 58px;
+				height: 66px;
+				display: grid;
+				place-items: center;
+				font-size: 28px;
+				background: var(--surface);
+				border: 2px dashed var(--green);
+				border-radius: 8px;
+				transform: rotate(6deg);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+			}
+			.from {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+				margin-bottom: 14px;
+				padding-right: 64px;
+			}
+			.avatar {
+				width: 46px;
+				height: 46px;
+				flex-shrink: 0;
+				border-radius: 50%;
+				display: grid;
+				place-items: center;
+				background: linear-gradient(140deg, #1e7a48, #0d5747);
+				color: #fff;
+				font-weight: 800;
+				font-size: 19px;
+			}
+			.from b {
+				display: block;
+				color: var(--text);
+				font-size: 16.5px;
+				line-height: 1.3;
+			}
+			.from span {
+				color: var(--text-3);
+				font-size: 13.5px;
+			}
+			.letter p {
+				margin: 0 0 12px;
+			}
+			.letter .bye {
+				margin: 16px 0 0;
+				color: var(--text-2);
+			}
+			.signature {
+				display: block;
+				margin-top: 2px;
+				font-family: "Segoe Script", "Bradley Hand", "Snell Roundhand", cursive;
+				font-size: 30px;
+				line-height: 1.2;
+				color: var(--green);
+			}
+
+			/* ── Ce susții ── */
+			h2.section {
+				font-size: 21px;
+				letter-spacing: -0.3px;
+				margin: 38px 0 6px;
+			}
+			.section-sub {
+				margin: 0 0 16px;
+				color: var(--text-3);
+				font-size: 15px;
+			}
+			.grid {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 12px;
+			}
+			@media (min-width: 600px) {
+				.grid {
+					grid-template-columns: 1fr 1fr;
+				}
+			}
+			.tile {
+				display: flex;
+				gap: 14px;
+				align-items: flex-start;
+				background: var(--surface);
+				border: 1px solid var(--border);
+				border-radius: 20px;
+				padding: 18px;
+				transition:
+					transform 0.15s ease,
+					box-shadow 0.15s ease;
+			}
+			.tile:hover {
+				transform: translateY(-2px);
+				box-shadow: var(--shadow);
+			}
+			.tile .ico {
+				width: 48px;
+				height: 48px;
+				flex-shrink: 0;
+				border-radius: 16px;
+				display: grid;
+				place-items: center;
+				font-size: 24px;
+			}
+			.ico.c1 {
+				background: linear-gradient(140deg, #dff3e7, #bfe6cf);
+			}
+			.ico.c2 {
+				background: linear-gradient(140deg, #e3edff, #c8daff);
+			}
+			.ico.c3 {
+				background: linear-gradient(140deg, #fff1d6, #ffe0a6);
+			}
+			.ico.c4 {
+				background: linear-gradient(140deg, #f6e3ff, #e6c8ff);
+			}
+			.tile h3 {
+				margin: 0 0 4px;
+				font-size: 16.5px;
+				line-height: 1.3;
+			}
+			.tile p {
+				margin: 0;
+				color: var(--text-2);
+				font-size: 14.5px;
+			}
+
+			/* ── Alte feluri de a ajuta ── */
+			.ways {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				display: grid;
+				gap: 10px;
+			}
+			.ways li {
+				display: flex;
+				gap: 12px;
+				align-items: flex-start;
+				background: var(--surface);
+				border: 1px solid var(--border);
+				border-radius: 16px;
+				padding: 14px 16px;
+				color: var(--text-2);
+				font-size: 15px;
+			}
+			.ways li span {
+				font-size: 20px;
+				line-height: 1.3;
+			}
+			.ways li b {
+				color: var(--text);
+			}
+
+			.questions {
+				margin-top: 34px;
+				color: var(--text-3);
+				font-size: 14.5px;
+				text-align: center;
 			}
 			footer {
-				margin-top: 48px;
+				margin-top: 26px;
+				padding-top: 16px;
+				border-top: 1px solid var(--border);
+				color: var(--text-3);
 				font-size: 13px;
-				color: #777;
-				border-top: 1px solid #eee;
-				padding-top: 18px;
-			}
-			.status {
-				font-size: 14px;
-				color: #6b7280;
-				padding: 14px 0;
-			}
-			.status.error {
-				color: #b45309;
+				text-align: center;
 			}
 		</style>
 	</head>
 	<body>
-		<h1>Susține HikeTag</h1>
-		<p class="sub">
-			HikeTag e făcut și ținut în viață de un singur om, nu de o firmă.
-			Dacă aplicația ți-a fost de folos și vrei să ajuți, poți dona cât
-			consideri — orice sumă contează și nimic nu e obligatoriu.
-		</p>
-
-		<div class="card">
-			<!-- Linkul vine din panoul de admin (setarea donation.revolut_url), ca sa poata fi schimbat
-       fara o versiune noua de aplicatie si fara a reedita pagina asta. -->
-			<div id="status" class="status">Se încarcă...</div>
-
-			<a id="revolut-btn" class="btn" href="#" hidden rel="noopener">
-				Donează prin Revolut
+		<div class="wrap">
+			<!-- Poza are desenat un buton „Susține comunitatea” — apăsat, duce la caseta cu Revolut. -->
+			<a class="hero" href="#sustine" aria-label="Mergi la susținere">
+				<img
+					src="sustine-comunitatea.jpg"
+					alt="Drumeți pe munte, bicicliști, alergători și oameni la plajă — comunitatea HikeTag"
+					width="1376"
+					height="768"
+				/>
 			</a>
 
-			<button id="copy-btn" class="btn secondary" hidden>
-				Copiază linkul
-			</button>
-
-			<div id="qr" class="qr-wrap" hidden>
-				<p class="muted" style="margin-bottom: 10px">
-					Ești pe calculator? Scanează cu telefonul:
+			<section id="sustine" class="give" aria-labelledby="give-title">
+				<span class="eyebrow">Susține comunitatea</span>
+				<h1 id="give-title">Fiecare pas contează</h1>
+				<p class="give-sub">
+					Alegi tu suma. Orice contribuție, cât de mică, ține HikeTag în
+					mișcare pentru toată comunitatea.
 				</p>
-				<img
-					id="qr-img"
-					alt="Cod QR pentru donație"
-					width="200"
-					height="200"
-				/>
+
+				<!-- Linkul vine din panoul de admin (setarea donation.revolut_url), ca sa poata fi schimbat
+				     fara o versiune noua de aplicatie si fara a reedita pagina asta. -->
+				<div id="status" class="status">Se încarcă...</div>
+
+				<a id="revolut-btn" class="btn" href="#" hidden rel="noopener">
+					<!-- Sigla Revolut (Simple Icons) — arată doar cu ce se plătește. -->
+					<svg
+						width="20"
+						height="20"
+						viewBox="0 0 24 24"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							d="M20.9133 6.9566C20.9133 3.1208 17.7898 0 13.9503 0H2.424v3.8605h10.9782c1.7376 0 3.177 1.3651 3.2087 3.043.016.84-.2994 1.633-.8878 2.2324-.5886.5998-1.375.9303-2.2144.9303H9.2322a.2756.2756 0 0 0-.2755.2752v3.431c0 .0585.018.1142.052.1612L16.2646 24h5.3114l-7.2727-10.094c3.6625-.1838 6.61-3.2612 6.61-6.9494zM6.8943 5.9229H2.424V24h4.4704z"
+						/>
+					</svg>
+					Susține prin Revolut
+					<svg
+						width="16"
+						height="16"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<path d="M7 17 17 7M8 7h9v9" />
+					</svg>
+				</a>
+
+				<div>
+					<button id="copy-btn" class="btn ghost" hidden>
+						Copiază linkul
+					</button>
+				</div>
+
+				<p id="safe" class="safe" hidden>
+					Plata se face pe pagina Revolut, în siguranță. Poți plăti și cu
+					cardul, chiar dacă nu ai cont Revolut.
+				</p>
+
+				<div id="qr" class="qr-wrap" hidden>
+					<p>Ești pe calculator? Scanează cu telefonul:</p>
+					<img
+						id="qr-img"
+						alt="Cod QR pentru susținere"
+						width="180"
+						height="180"
+					/>
+				</div>
+			</section>
+
+			<section class="letter" aria-label="Un gând de la Alex">
+				<div class="stamp" aria-hidden="true">⛰️</div>
+				<div class="from">
+					<div class="avatar" aria-hidden="true">A</div>
+					<div>
+						<b>Un gând de la Alex</b>
+						<span>cel care construiește HikeTag</span>
+					</div>
+				</div>
+				<p>
+					HikeTag a pornit dintr-o dorință simplă: să găsești ușor oameni
+					cu care să ieși pe munte, pe bicicletă, la alergare sau la o
+					tură prin oraș — și să nu mai stai acasă doar pentru că n-ai cu
+					cine pleca.
+				</p>
+				<p>
+					Nu e o firmă în spate și nici investitori. Sunt eu, multe ore de
+					muncă și o comunitate care crește cu fiecare tură.
+				</p>
+				<p>
+					Dacă aplicația ți-a adus un drum frumos sau oameni noi alături și
+					vrei să dai ceva înapoi, mă bucur enorm. Iar dacă nu, e perfect
+					în regulă — faptul că ești aici contează deja.
+				</p>
+				<p class="bye">
+					Ne vedem pe traseu,
+					<span class="signature">Alex</span>
+				</p>
+			</section>
+
+			<h2 class="section">Ce susții, de fapt</h2>
+			<p class="section-sub">Uite ce ține în viață ajutorul tău:</p>
+			<div class="grid">
+				<div class="tile">
+					<div class="ico c1" aria-hidden="true">⛰️</div>
+					<div>
+						<h3>O aplicație mereu pornită</h3>
+						<p>
+							Ca să găsești o tură la orice oră, cu toate evenimentele,
+							mesajele și pozele voastre.
+						</p>
+					</div>
+				</div>
+				<div class="tile">
+					<div class="ico c2" aria-hidden="true">📱</div>
+					<div>
+						<h3>Direct în telefonul tău</h3>
+						<p>
+							Google Play și App Store au costurile lor, ca aplicația
+							să se instaleze ușor și în siguranță.
+						</p>
+					</div>
+				</div>
+				<div class="tile">
+					<div class="ico c3" aria-hidden="true">🗺️</div>
+					<div>
+						<h3>Hărți, trasee și notificări</h3>
+						<p>
+							Ca să știi pe unde mergi și să afli la timp când pleacă
+							grupul sau când îți scrie cineva.
+						</p>
+					</div>
+				</div>
+				<div class="tile">
+					<div class="ico c4" aria-hidden="true">✨</div>
+					<div>
+						<h3>Lucruri noi, mereu</h3>
+						<p>
+							Multe dintre ideile voastre ajung în aplicație. Susținerea
+							ta înseamnă mai mult timp pentru ele.
+						</p>
+					</div>
+				</div>
 			</div>
+
+			<h2 class="section">Și dacă azi nu poți dona</h2>
+			<p class="section-sub">Ajută la fel de mult, crede-mă:</p>
+			<ul class="ways">
+				<li>
+					<span aria-hidden="true">👋</span>
+					<div>
+						<b>Ia un prieten cu tine</b> la următoarea tură — o
+						comunitate crește din om în om.
+					</div>
+				</li>
+				<li>
+					<span aria-hidden="true">🥾</span>
+					<div>
+						<b>Organizează tu o ieșire.</b> Fiecare eveniment nou e un
+						motiv în plus pentru alții să iasă din casă.
+					</div>
+				</li>
+				<li>
+					<span aria-hidden="true">⭐</span>
+					<div>
+						<b>Lasă o recenzie</b> în Google Play sau App Store — îi ajută
+						pe alții să ne găsească.
+					</div>
+				</li>
+				<li>
+					<span aria-hidden="true">💬</span>
+					<div>
+						<b>Spune-ne ce ți-ar plăcea</b> în aplicație, la
+						<a href="mailto:hiketag@gmail.com">hiketag@gmail.com</a>.
+					</div>
+				</li>
+			</ul>
+
+			<p class="questions">
+				Ai o întrebare?
+				<a href="mailto:hiketag@gmail.com">hiketag@gmail.com</a> · Vezi și
+				<a href="/legal/">documentele legale</a>
+			</p>
+
+			<footer>HikeTag este operată de Alexandru Tabara, persoană fizică.</footer>
 		</div>
-
-		<h2>La ce se duc banii</h2>
-		<ul>
-			<li>serverul pe care rulează aplicația și baza de date;</li>
-			<li>domeniul și certificatele;</li>
-			<li>taxele anuale cerute de Google Play și App Store;</li>
-			<li>
-				serviciile externe folosite de aplicație (hărți, notificări).
-			</li>
-		</ul>
-		<p class="muted">
-			HikeTag nu are reclame, nu vinde date și nu are abonamente.
-			Donațiile nu îți dau niciun avantaj în aplicație — rămâne la fel
-			pentru toată lumea.
-		</p>
-
-		<h2>Întrebări</h2>
-		<p class="muted">
-			Pentru orice nelămurire:
-			<a href="mailto:hiketag@gmail.com">hiketag@gmail.com</a>. Vezi și
-			<a href="/legal/">documentele legale</a>.
-		</p>
-
-		<footer>
-			HikeTag este operată de Alexandru Tabara, persoană fizică.
-		</footer>
 
 		<script>
 			// Configurarea vine de la API, nu e scrisa in pagina: asa linkul se schimba din admin,
 			// dintr-un singur loc, fara sa fie nevoie de un deploy nou al site-ului.
 			var API = "https://api.hiketag.ro/api/app-settings/public";
+			// Rezerva, DOAR cand API-ul nu raspunde deloc (server picat, retea, sau pagina deschisa de pe
+			// calculator — API-ul raspunde doar paginii de pe www.hiketag.ro). Un link golit intentionat
+			// din admin NU cade pe ea: atunci pagina spune ca metoda nu e configurata.
+			var FALLBACK_URL = "https://revolut.me/alexanost3";
 
 			var statusEl = document.getElementById("status");
 			var btn = document.getElementById("revolut-btn");
 			var copyBtn = document.getElementById("copy-btn");
+			var safe = document.getElementById("safe");
 			var qr = document.getElementById("qr");
 			var qrImg = document.getElementById("qr-img");
 
-			function showError(msg) {
-				statusEl.className = "status error";
-				statusEl.textContent = msg;
+			function arata(url) {
+				statusEl.hidden = true;
+				btn.href = url;
+				btn.hidden = false;
+				copyBtn.hidden = false;
+				safe.hidden = false;
+
+				// QR-ul e util doar pe ecran mare — pe telefon nu ai cum sa-ti scanezi propriul ecran.
+				if (window.matchMedia("(min-width: 700px)").matches) {
+					qrImg.src =
+						"https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=" +
+						encodeURIComponent(url);
+					qr.hidden = false;
+				}
+
+				copyBtn.addEventListener("click", function () {
+					// .catch obligatoriu: scrierea in clipboard e refuzata in unele contexte (permisiune
+					// blocata, pagina deschisa direct de pe disc). Fara el, eroarea ramane nerezolvata
+					// si butonul pare pur si simplu mort, fara sa spuna nimic.
+					navigator.clipboard
+						.writeText(url)
+						.then(function () {
+							copyBtn.textContent = "Link copiat ✓";
+							setTimeout(function () {
+								copyBtn.textContent = "Copiază linkul";
+							}, 2000);
+						})
+						.catch(function () {
+							copyBtn.textContent = "Copiază manual din bara de adrese";
+							setTimeout(function () {
+								copyBtn.textContent = "Copiază linkul";
+							}, 3000);
+						});
+				});
 			}
 
 			fetch(API)
@@ -205,50 +643,14 @@
 				.then(function (cfg) {
 					var url = cfg && cfg.donationUrl;
 					if (!url) {
-						showError(
-							"Metoda de donație nu este configurată încă. Revino puțin mai târziu.",
-						);
+						statusEl.textContent =
+							"Metoda de susținere nu este configurată încă. Revino puțin mai târziu.";
 						return;
 					}
-
-					statusEl.hidden = true;
-					btn.href = url;
-					btn.hidden = false;
-					copyBtn.hidden = false;
-
-					// QR-ul e util doar pe ecran mare — pe telefon nu ai cum sa-ti scanezi propriul ecran.
-					if (window.matchMedia("(min-width: 700px)").matches) {
-						qrImg.src =
-							"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" +
-							encodeURIComponent(url);
-						qr.hidden = false;
-					}
-
-					copyBtn.addEventListener("click", function () {
-						// .catch obligatoriu: scrierea in clipboard e refuzata in unele contexte (permisiune
-						// blocata, pagina deschisa direct de pe disc). Fara el, eroarea ramane nerezolvata
-						// si butonul pare pur si simplu mort, fara sa spuna nimic.
-						navigator.clipboard
-							.writeText(url)
-							.then(function () {
-								copyBtn.textContent = "Link copiat";
-								setTimeout(function () {
-									copyBtn.textContent = "Copiază linkul";
-								}, 2000);
-							})
-							.catch(function () {
-								copyBtn.textContent =
-									"Copiază manual din bara de adrese";
-								setTimeout(function () {
-									copyBtn.textContent = "Copiază linkul";
-								}, 3000);
-							});
-					});
+					arata(url);
 				})
 				.catch(function () {
-					showError(
-						"Nu am putut încărca metoda de donație. Încearcă să reîncarci pagina.",
-					);
+					arata(FALLBACK_URL);
 				});
 		</script>
 	</body>

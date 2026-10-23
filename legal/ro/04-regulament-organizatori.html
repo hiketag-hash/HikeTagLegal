@@ -69,11 +69,30 @@
 		</style>
 	</head>
 	<body>
+		<!-- Deschisă din formularul de cont de pe site (?din=aplicatie): buton care închide fila și te întoarce la formular. -->
+		<a id="back-to-app" href="https://www.hiketag.ro/" style="display:none;margin:0 0 14px;padding:8px 14px;border-radius:10px;background:#0d5747;color:#fff;font-weight:700;font-size:14px;text-decoration:none">← Înapoi la HikeTag</a>
+		<script>
+			(function () {
+				var fromApp = /[?&]din=aplicatie/.test(location.search);
+				try {
+					if (fromApp) sessionStorage.setItem("hiketag_din_aplicatie", "1");
+					fromApp = fromApp || sessionStorage.getItem("hiketag_din_aplicatie") === "1";
+				} catch (e) {}
+				if (!fromApp) return;
+				var a = document.getElementById("back-to-app");
+				a.style.display = "inline-block";
+				a.addEventListener("click", function (ev) {
+					ev.preventDefault();
+					window.close();
+					setTimeout(function () { location.href = "https://www.hiketag.ro/"; }, 300);
+				});
+			})();
+		</script>
 		<a class="back" href="../index.html">← Toate documentele</a>
 		<h1 id="regulament-pentru-organizatorii-de-evenimente-hiketag">
 			Regulament pentru Organizatorii de Evenimente — HikeTag
 		</h1>
-		<p><strong>Ultima actualizare:</strong> 3 august 2026</p>
+		<p><strong>Ultima actualizare:</strong> 23 octombrie 2026</p>
 		<p>
 			Acest Regulament face parte din
 			<a href="02-termeni-si-conditii.html">Termenii și Condițiile</a>
@@ -116,6 +135,16 @@
 				<strong>nu procesează plăți</strong> și nu este parte la nicio
 				înțelegere financiară între participanți.
 			</li>
+			<li>
+				la un eveniment comercial (cu plată): faptul că este comercial,
+				prețul sau mențiunea că prețul se comunică separat, ce include
+				prețul și condițiile de plată și de anulare. Dacă organizezi
+				evenimente cu plată, trebuie să ai autorizațiile cerute de lege
+				pentru activitatea ta (ex. licență de agenție de turism, atestat
+				de ghid montan) și să respecți obligațiile fiscale și drepturile
+				consumatorilor — conform secțiunii 6 din
+				<a href="02-termeni-si-conditii.html">Termenii și Condițiile</a>.
+			</li>
 		</ul>
 		<p>
 			Ești responsabil să actualizezi aceste informații dacă apar
@@ -129,7 +158,11 @@
 				Poți accepta sau respinge cererile de participare la evenimentul
 				tău, aplicând criterii obiective și nediscriminatorii (nu pe
 				criterii de rasă, etnie, gen, religie, orientare sexuală,
-				dizabilitate sau alte criterii protejate de lege).
+				dizabilitate sau alte criterii protejate de lege). Singura
+				excepție privind genul sunt evenimentele pe care le marchezi
+				explicit „doar pentru femei” sau „doar pentru bărbați”, conform
+				secțiunii 6 din
+				<a href="02-termeni-si-conditii.html">Termenii și Condițiile</a>.
 			</li>
 			<li>
 				Dacă anulezi evenimentul sau faci modificări importante

@@ -65,16 +65,47 @@
 		</style>
 	</head>
 	<body>
+		<!-- Deschisă din formularul de cont de pe site (?din=aplicatie): buton care închide fila și te întoarce la formular. -->
+		<a id="back-to-app" href="https://www.hiketag.ro/" style="display:none;margin:0 0 14px;padding:8px 14px;border-radius:10px;background:#0d5747;color:#fff;font-weight:700;font-size:14px;text-decoration:none">← Înapoi la HikeTag</a>
+		<script>
+			(function () {
+				var fromApp = /[?&]din=aplicatie/.test(location.search);
+				try {
+					if (fromApp) sessionStorage.setItem("hiketag_din_aplicatie", "1");
+					fromApp = fromApp || sessionStorage.getItem("hiketag_din_aplicatie") === "1";
+				} catch (e) {}
+				if (!fromApp) return;
+				var a = document.getElementById("back-to-app");
+				a.style.display = "inline-block";
+				a.addEventListener("click", function (ev) {
+					ev.preventDefault();
+					window.close();
+					setTimeout(function () { location.href = "https://www.hiketag.ro/"; }, 300);
+				});
+			})();
+		</script>
 		<h1>Ștergerea contului HikeTag</h1>
-		<p><strong>Ultima actualizare:</strong> 29 august 2026</p>
+		<p><strong>Ultima actualizare:</strong> 23 octombrie 2026</p>
 
 		<p>
-			Această pagină explică cum poți solicita ștergerea contului tău
-			HikeTag și a datelor asociate, indiferent dacă mai ai sau nu
-			aplicația instalată pe telefon.
+			Această pagină explică cum îți poți șterge contul HikeTag și ce se
+			întâmplă cu datele tale, indiferent dacă mai ai sau nu aplicația
+			instalată pe telefon.
 		</p>
 
-		<h2>Cum soliciți ștergerea</h2>
+		<h2>Varianta 1 — direct din aplicație (imediat)</h2>
+		<div class="box">
+			<ol>
+				<li>Deschide aplicația HikeTag sau site-ul www.hiketag.ro.</li>
+				<li>
+					Mergi la <strong>Profil → Setări</strong> și apasă
+					<strong>„Șterge definitiv contul”</strong>.
+				</li>
+				<li>Confirmă cu parola contului. Ștergerea se face pe loc.</li>
+			</ol>
+		</div>
+
+		<h2>Varianta 2 — prin email (fără aplicație)</h2>
 		<div class="box">
 			<ol>
 				<li>
@@ -98,11 +129,6 @@
 			</ol>
 		</div>
 
-		<p>
-			Nu este nevoie să ai aplicația instalată sau contul activ pentru a
-			trimite această cerere.
-		</p>
-
 		<h2>Ce date sunt șterse și ce se păstrează</h2>
 		<table>
 			<tr>
@@ -111,40 +137,48 @@
 			</tr>
 			<tr>
 				<td>
-					Date de cont și profil (nume, email, gen, dată naștere, bio,
-					poză de profil)
+					Date de cont și profil (nume, email, parolă, gen, anul nașterii,
+					bio, poze de profil și copertă)
 				</td>
-				<td>Șterse definitiv</td>
+				<td>
+					Șterse definitiv; nu te mai poți autentifica cu acest cont
+				</td>
 			</tr>
 			<tr>
 				<td>Locația (ultima poziție cunoscută)</td>
 				<td>
-					Șterse definitiv — de altfel, se șterg automat și înainte de
-					asta, imediat ce nu mai ai nicio partajare activă
+					Ștearsă — de altfel, se șterge automat și înainte de asta,
+					imediat ce nu mai ai nicio partajare activă
 				</td>
+			</tr>
+			<tr>
+				<td>Identificatorul pentru notificări push</td>
+				<td>Șters; nu mai primești notificări</td>
 			</tr>
 			<tr>
 				<td>
-					Mesaje trimise în chat-uri (grup și private) și mesaje
-					vocale
+					Mesaje trimise în chat-uri (grup și private), mesaje vocale,
+					fotografii din conversații, recenzii date altora
 				</td>
-				<td>Șterse definitiv</td>
-			</tr>
-			<tr>
-				<td>Fotografii încărcate în conversații sau evenimente</td>
-				<td>Șterse definitiv</td>
-			</tr>
-			<tr>
-				<td>Recenzii acordate/primite de la alți utilizatori</td>
-				<td>Șterse definitiv</td>
+				<td>
+					Rămân vizibile pentru ceilalți participanți, pentru că fac
+					parte și din conversațiile și istoricul lor, dar
+					<strong>anonimizate</strong>: apar sub numele „Utilizator șters”,
+					fără poză și fără să mai poată fi legate de tine. Înainte de
+					ștergerea contului, îți poți șterge singur mesajele din chat.
+				</td>
 			</tr>
 			<tr>
 				<td>Evenimente pe care le-ai organizat</td>
 				<td>
-					Șterse; dacă evenimentul are alți participanți, evenimentul
-					poate fi păstrat pentru aceștia, dar contul tău de
-					organizator e dezasociat/anonimizat
+					Cele viitoare sunt anulate, iar participanții sunt anunțați.
+					Cele trecute rămân în istoricul participanților, cu
+					organizatorul afișat ca „Utilizator șters”.
 				</td>
+			</tr>
+			<tr>
+				<td>Locurile tale la evenimentele altora</td>
+				<td>Eliberate pentru evenimentele viitoare</td>
 			</tr>
 			<tr>
 				<td>Sesizări/rapoarte trimise despre alți utilizatori</td>
@@ -161,6 +195,13 @@
 				</td>
 			</tr>
 		</table>
+
+		<p>
+			Dacă vrei ca și mesajele sau pozele tale să fie șterse complet, nu
+			doar anonimizate, scrie-ne la
+			<a href="mailto:hiketag@gmail.com">hiketag@gmail.com</a> și
+			analizăm cererea conform GDPR.
+		</p>
 
 		<p>
 			Pentru detalii complete despre datele colectate și temeiurile de

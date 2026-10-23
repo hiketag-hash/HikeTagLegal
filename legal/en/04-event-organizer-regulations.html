@@ -69,11 +69,30 @@
 		</style>
 	</head>
 	<body>
+		<!-- Deschisă din formularul de cont de pe site (?din=aplicatie): buton care închide fila și te întoarce la formular. -->
+		<a id="back-to-app" href="https://www.hiketag.ro/" style="display:none;margin:0 0 14px;padding:8px 14px;border-radius:10px;background:#0d5747;color:#fff;font-weight:700;font-size:14px;text-decoration:none">← Back to HikeTag</a>
+		<script>
+			(function () {
+				var fromApp = /[?&]din=aplicatie/.test(location.search);
+				try {
+					if (fromApp) sessionStorage.setItem("hiketag_din_aplicatie", "1");
+					fromApp = fromApp || sessionStorage.getItem("hiketag_din_aplicatie") === "1";
+				} catch (e) {}
+				if (!fromApp) return;
+				var a = document.getElementById("back-to-app");
+				a.style.display = "inline-block";
+				a.addEventListener("click", function (ev) {
+					ev.preventDefault();
+					window.close();
+					setTimeout(function () { location.href = "https://www.hiketag.ro/"; }, 300);
+				});
+			})();
+		</script>
 		<a class="back" href="../index.html">← All documents</a>
 		<h1 id="event-organizer-regulations-hiketag">
 			Event Organizer Regulations — HikeTag
 		</h1>
-		<p><strong>Last updated:</strong> August 3, 2026</p>
+		<p><strong>Last updated:</strong> October 23, 2026</p>
 		<p>
 			These Regulations are part of the HikeTag
 			<a href="02-terms-and-conditions.html">Terms and Conditions</a> and
@@ -108,6 +127,16 @@
 				<strong>does not process payments</strong> and is not a party to
 				any financial arrangement between participants.
 			</li>
+			<li>
+				for a commercial (paid) event: that it is commercial, the price or
+				a note that the price is provided separately, what the price
+				includes, and the payment and cancellation terms. If you organize
+				paid events, you must hold the permits required by law for your
+				activity (e.g. a travel agency license, a mountain guide
+				certificate) and comply with tax obligations and consumer rights —
+				under section 6 of the
+				<a href="02-terms-and-conditions.html">Terms and Conditions</a>.
+			</li>
 		</ul>
 		<p>
 			You are responsible for updating this information if it changes and
@@ -119,7 +148,10 @@
 				You may accept or decline requests to join your event, applying
 				objective, non-discriminatory criteria (not based on race,
 				ethnicity, gender, religion, sexual orientation, disability, or
-				other criteria protected by law).
+				other criteria protected by law). The only exception regarding
+				gender is events you explicitly mark "women only" or "men only",
+				under section 6 of the
+				<a href="02-terms-and-conditions.html">Terms and Conditions</a>.
 			</li>
 			<li>
 				If you cancel the event or make significant changes (route,

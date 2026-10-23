@@ -64,24 +64,41 @@
 		</style>
 	</head>
 	<body>
+		<!-- Deschisă din formularul de cont de pe site (?din=aplicatie): buton care închide fila și te întoarce la formular. -->
+		<a id="back-to-app" href="https://www.hiketag.ro/" style="display:none;margin:0 0 14px;padding:8px 14px;border-radius:10px;background:#0d5747;color:#fff;font-weight:700;font-size:14px;text-decoration:none">← Înapoi la HikeTag</a>
+		<script>
+			(function () {
+				var fromApp = /[?&]din=aplicatie/.test(location.search);
+				try {
+					if (fromApp) sessionStorage.setItem("hiketag_din_aplicatie", "1");
+					fromApp = fromApp || sessionStorage.getItem("hiketag_din_aplicatie") === "1";
+				} catch (e) {}
+				if (!fromApp) return;
+				var a = document.getElementById("back-to-app");
+				a.style.display = "inline-block";
+				a.addEventListener("click", function (ev) {
+					ev.preventDefault();
+					window.close();
+					setTimeout(function () { location.href = "https://www.hiketag.ro/"; }, 300);
+				});
+			})();
+		</script>
 		<h1>Politica de Confidențialitate — HikeTag</h1>
-		<p><strong>Ultima actualizare:</strong> 3 august 2026</p>
+		<p><strong>Ultima actualizare:</strong> 23 octombrie 2026</p>
 
 		<h2>1. Cine suntem</h2>
 		<p>
-			HikeTag ("noi", "aplicația") este o aplicație mobilă care le permite
-			utilizatorilor din România să organizeze, să găsească și să
+			HikeTag ("noi", "aplicația") este o aplicație mobilă și un site
+			web (<a href="https://www.hiketag.ro">www.hiketag.ro</a>) care le
+			permit utilizatorilor din România să organizeze, să găsească și să
 			participe la drumeții, excursii montane și alte evenimente în aer
-			liber, împreună cu alți utilizatori.
+			liber, împreună cu alți utilizatori. Tot ce scrie mai jos despre
+			„aplicație” se aplică și site-ului.
 		</p>
 		<p>Operatorul de date cu caracter personal pentru HikeTag este:</p>
 		<p>
 			<strong>Alexandru Tabara, persoană fizică</strong><br />
-			Adresă:
-			<strong
-				>Bulevardul Nicolae Grigorescu nr. 2, bloc W1, București,
-				România</strong
-			><br />
+			Localitate: <strong>București, România</strong><br />
 			Email de contact pentru protecția datelor:
 			<strong
 				><a href="mailto:hiketag@gmail.com"
@@ -101,10 +118,18 @@
 		<ul>
 			<li>Nume</li>
 			<li>Adresă de email</li>
-			<li>Gen</li>
-			<li>Data nașterii</li>
+			<li>Parola (stocată doar criptată, de furnizorul de autentificare)</li>
+			<li>
+				Gen (femeie, bărbat sau „Prefer să nu spun”) — folosit și ca să
+				îți arătăm sau să îți ascundem evenimentele marcate „doar pentru
+				femei” / „doar pentru bărbați”
+			</li>
+			<li>
+				Anul nașterii — folosit ca să verificăm vârsta minimă; vârsta ta
+				este ascunsă implicit și o arăți altora doar dacă alegi asta
+			</li>
 			<li>Descriere/bio de profil</li>
-			<li>Poză de profil (avatar)</li>
+			<li>Poze de profil și poza de copertă</li>
 		</ul>
 
 		<h3>2.2 Conținut generat de tine</h3>
@@ -117,11 +142,20 @@
 			<li>Fotografii atașate în conversații sau la evenimente</li>
 			<li>
 				Recenzii (review-uri) acordate sau primite de la alți
-				participanți
+				participanți; pe profilul celui evaluat apar doar ca medie, fără
+				numele celui care le-a dat
 			</li>
+			<li>Voturile date pentru insignele altor participanți</li>
 			<li>
 				Sesizări/rapoarte trimise despre alți utilizatori (motiv,
 				descriere)
+			</li>
+			<li>
+				Mesajele de feedback trimise către noi, împreună cu pozele,
+				video-urile sau fișierele PDF atașate
+			</li>
+			<li>
+				Textul pe care îl cauți când alegi un loc sau un traseu pe hartă
 			</li>
 		</ul>
 
@@ -200,10 +234,17 @@
 				Evenimentele la care participi, pe care le organizezi sau pe
 				care le-ai marcat ca favorite
 			</li>
-			<li>Insigne (badge-uri) obținute în aplicație</li>
+			<li>
+				Insigne (badge-uri), puncte de experiență (XP) și nivelul tău în
+				aplicație
+			</li>
 			<li>
 				Un jurnal al acțiunilor tale relevante în aplicație ("Acțiunile
 				tale"), vizibil doar ție
+			</li>
+			<li>
+				Dacă ești online și momentul în care ai citit un mesaj („Văzut”),
+				vizibile celor cu care vorbești
 			</li>
 		</ul>
 
@@ -211,8 +252,24 @@
 		<ul>
 			<li>
 				Date generate automat de funcționarea aplicației (ex. jurnal de
-				erori tehnice), în măsura în care sunt necesare pentru buna
+				erori tehnice, adresa IP, versiunea aplicației și tipul
+				dispozitivului), în măsura în care sunt necesare pentru buna
 				funcționare și securitatea serviciului
+			</li>
+			<li>
+				Pe site, informații păstrate în browserul tău (stocare locală),
+				strict necesare ca să rămâi conectat și să îți păstrăm preferințele
+				— vezi <a href="ro/05-politica-de-cookies.html">Politica de Cookies</a>
+			</li>
+		</ul>
+
+		<h3>2.7 Donații</h3>
+		<ul>
+			<li>
+				Dacă alegi să susții proiectul printr-o donație, plata se face pe
+				pagina Revolut, nu în aplicație. Datele cardului nu ajung la noi;
+				vedem doar ce ne transmite Revolut despre plată (de regulă suma și
+				numele afișat al celui care a donat).
 			</li>
 		</ul>
 
@@ -257,16 +314,27 @@
 				<td>Interesul nostru legitim de a menține un mediu sigur</td>
 			</tr>
 			<tr>
-				<td>Îmbunătățirea aplicației</td>
-				<td>Date tehnice, jurnal de activitate</td>
+				<td>Îmbunătățirea aplicației și repararea erorilor</td>
+				<td>Date tehnice, jurnal de activitate, feedback</td>
 				<td>Interesul nostru legitim</td>
+			</tr>
+			<tr>
+				<td>Căutarea locurilor pe hartă și vremea la eveniment</td>
+				<td>Textul căutat, coordonatele evenimentului</td>
+				<td>Executarea contractului</td>
+			</tr>
+			<tr>
+				<td>Primirea donațiilor</td>
+				<td>Datele transmise de Revolut despre plată</td>
+				<td>Consimțământul tău (donația e voluntară)</td>
 			</tr>
 		</table>
 		<p>
-			Nu folosim datele tale pentru reclame targetate, nu vindem date
-			către terți și, la momentul redactării acestui document, aplicația
-			<strong>nu are nicio formă de monetizare</strong> (fără reclame,
-			fără plăți, fără abonamente).
+			Nu folosim datele tale pentru reclame targetate și nu vindem date
+			către terți. Aplicația nu are reclame, abonamente sau plăți în
+			aplicație. Singurele sume de bani sunt donațiile voluntare, făcute
+			pe pagina Revolut, și prețurile pe care organizatorii de evenimente
+			comerciale le afișează și le încasează direct, în afara aplicației.
 		</p>
 
 		<h2>4. Cui partajăm datele</h2>
@@ -279,8 +347,33 @@
 			>, care procesează date în numele nostru, strict pentru scopurile
 			descrise în această politică, pe baza unor contracte care le impun
 			obligații de confidențialitate și securitate echivalente cu ale
-			noastre.
+			noastre. Principalii furnizori sunt:
 		</p>
+		<ul>
+			<li>
+				<strong>Contabo</strong> (Germania) — serverul pe care rulează
+				aplicația și jurnalul de erori tehnice;
+			</li>
+			<li>
+				<strong>Supabase</strong> — baza de date, autentificarea (cont și
+				parolă) și stocarea fotografiilor și a mesajelor vocale;
+			</li>
+			<li>
+				<strong>Google Firebase</strong> și serviciile de notificări ale
+				Apple și Google — trimiterea notificărilor push;
+			</li>
+			<li>
+				<strong>Mapy.com</strong> (Cehia) și
+				<strong>Photon / OpenStreetMap</strong> (Germania) — hărțile și
+				căutarea locurilor; primesc textul căutat, nu numele sau contul
+				tău;
+			</li>
+			<li>
+				<strong>MET Norway</strong> (Norvegia) — prognoza meteo; primește
+				doar coordonatele evenimentului, nicio dată despre tine;
+			</li>
+			<li><strong>Revolut</strong> — doar pentru donații, dacă alegi să donezi.</li>
+		</ul>
 		<p>
 			De asemenea, anumite date pe care le partajezi voluntar (poziția pe
 			hartă, mesajele, recenziile) sunt vizibile de către
@@ -294,7 +387,9 @@
 		<p>
 			Este posibil ca unii dintre furnizorii terți menționați la punctul 4
 			să proceseze sau să stocheze date pe servere situate în afara
-			României sau a Spațiului Economic European. În aceste cazuri, ne
+			României sau a Spațiului Economic European (de exemplu, serviciile
+			de notificări push ale Google, Apple și Firebase, în SUA). În aceste
+			cazuri, ne
 			asigurăm că transferul are loc în baza unor garanții adecvate (de
 			exemplu, clauze contractuale standard aprobate de Comisia Europeană)
 			sau alt mecanism recunoscut de legislația privind protecția datelor.
@@ -304,7 +399,8 @@
 		<ul>
 			<li>
 				<strong>Date de cont și profil</strong>: cât timp contul tău
-				este activ, plus o perioadă rezonabilă ulterior.
+				există. La ștergerea contului sunt șterse sau anonimizate imediat
+				(vezi secțiunea 9).
 			</li>
 			<li>
 				<strong>Locație</strong>: doar ultima poziție cunoscută, cât
@@ -312,18 +408,29 @@
 				expirarea/oprirea partajării.
 			</li>
 			<li>
-				<strong>Mesaje și conținut</strong>: cât timp contul și/sau
-				evenimentul asociat rămân active.
+				<strong>Mesaje, recenzii și evenimente</strong>: cât timp există
+				evenimentul sau conversația respectivă, pentru că fac parte și din
+				istoricul celorlalți participanți.
 			</li>
 			<li>
-				<strong>Rapoarte despre utilizatori</strong>: pe perioada
-				necesară pentru investigarea și soluționarea sesizării.
+				<strong>Poze, video-uri și fișiere din chatul de grup</strong>:
+				se șterg automat la 7 zile după sfârșitul evenimentului (cele
+				trimise după sfârșit, la 7 zile de la trimitere). În mesajele
+				private rămân până le ștergi tu.
+			</li>
+			<li>
+				<strong>Rapoarte despre utilizatori și feedback</strong>: pe
+				perioada necesară pentru investigarea și soluționarea lor.
+			</li>
+			<li>
+				<strong>Jurnale tehnice și de erori</strong>: cel mult 90 de zile.
 			</li>
 		</ul>
 		<p>
-			La ștergerea contului, datele sunt șterse sau anonimizate, cu
-			excepția celor pe care suntem obligați legal să le păstrăm o
-			perioadă suplimentară.
+			La ștergerea contului, datele de profil sunt șterse, iar
+			conținutul pe care l-ai creat rămâne anonimizat, cu excepția
+			datelor pe care suntem obligați legal să le păstrăm o perioadă
+			suplimentară.
 		</p>
 
 		<h2>7. Securitatea datelor</h2>
@@ -381,9 +488,17 @@
 
 		<h2 id="9-ștergerea-contului">9. Ștergerea contului</h2>
 		<p>
-			Poți solicita oricând ștergerea contului și a datelor asociate, cu
-			sau fără aplicația instalată — vezi pagina dedicată:
-			<a href="stergere-cont.html">Ștergere cont HikeTag</a>.
+			Poți șterge oricând contul direct din aplicație (Profil → Setări →
+			„Șterge definitiv contul”) sau, fără aplicație, printr-un email — vezi pagina
+			dedicată: <a href="stergere-cont.html">Ștergere cont HikeTag</a>.
+		</p>
+		<p>
+			La ștergere, numele, emailul, pozele, descrierea, anul nașterii și
+			genul tău sunt eliminate. Evenimentele, mesajele și recenziile pe
+			care le-ai lăsat rămân vizibile pentru ceilalți participanți, dar
+			sub numele „Utilizator șters”, fără să mai poată fi legate de tine.
+			Evenimentele viitoare pe care le organizai sunt anulate, iar locurile
+			tale la evenimentele altora sunt eliberate.
 		</p>
 
 		<h2>10. Minori</h2>
@@ -420,10 +535,7 @@
 				>Email:
 				<a href="mailto:hiketag@gmail.com">hiketag@gmail.com</a></strong
 			><br />
-			<strong
-				>Adresă: Bulevardul Nicolae Grigorescu nr. 2, bloc W1,
-				București, România</strong
-			>
+			<strong>Localitate: București, România</strong>
 		</p>
 
 		<footer>

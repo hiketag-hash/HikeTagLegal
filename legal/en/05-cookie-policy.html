@@ -69,95 +69,92 @@
 		</style>
 	</head>
 	<body>
+		<!-- Deschisă din formularul de cont de pe site (?din=aplicatie): buton care închide fila și te întoarce la formular. -->
+		<a id="back-to-app" href="https://www.hiketag.ro/" style="display:none;margin:0 0 14px;padding:8px 14px;border-radius:10px;background:#0d5747;color:#fff;font-weight:700;font-size:14px;text-decoration:none">← Back to HikeTag</a>
+		<script>
+			(function () {
+				var fromApp = /[?&]din=aplicatie/.test(location.search);
+				try {
+					if (fromApp) sessionStorage.setItem("hiketag_din_aplicatie", "1");
+					fromApp = fromApp || sessionStorage.getItem("hiketag_din_aplicatie") === "1";
+				} catch (e) {}
+				if (!fromApp) return;
+				var a = document.getElementById("back-to-app");
+				a.style.display = "inline-block";
+				a.addEventListener("click", function (ev) {
+					ev.preventDefault();
+					window.close();
+					setTimeout(function () { location.href = "https://www.hiketag.ro/"; }, 300);
+				});
+			})();
+		</script>
 		<a class="back" href="../index.html">← All documents</a>
 		<h1 id="cookie-policy-hiketag">Cookie Policy — HikeTag</h1>
-		<p><strong>Last updated:</strong> August 3, 2026</p>
-		<p>
-			&gt; <strong>Document status: TEMPLATE, INACTIVE.</strong> As of
-			this writing, HikeTag has no public website — only the mobile app
-			exists, which does not use cookies (no web browser is involved).
-			This document is prepared as a template, ready to be activated and
-			completed once a HikeTag marketing website exists. Do not publish
-			this document as a live policy until the website exists and the
-			sections marked `[to be completed]` are updated with the cookies
-			actually used.
-		</p>
+		<p><strong>Last updated:</strong> October 23, 2026</p>
 		<h2 id="1-what-cookies-are">1. What cookies are</h2>
 		<p>
 			Cookies are small text files stored in your browser when you visit a
 			website. They are used to remember preferences, measure traffic, or
-			enable essential site functionality.
-		</p>
-		<p>
-			*(Note: the HikeTag mobile app uses equivalent native mechanisms —
-			such as local storage on your phone — to keep you signed in. These
-			are not browser cookies and are described in the
-			<a href="01-privacy-policy.html">Privacy Policy</a>, not in this
-			document.)*
+			enable essential features of the site. A similar technology is the
+			browser's local storage, which we treat the same way.
 		</p>
 		<h2 id="2-scope">2. Scope</h2>
 		<p>
-			This policy will apply to the website
-			<strong>www.hiketag.ro</strong>, once it is published.
+			This policy applies to the <strong>www.hiketag.ro</strong> website
+			(including the web version of the app and the documents pages). The
+			mobile app does not use browser cookies; it only keeps on your phone
+			what is needed to keep you signed in, as described in the
+			<a href="01-privacy-policy.html">Privacy Policy</a>.
 		</p>
-		<h2 id="3-cookie-categories-that-will-be-used">
-			3. Cookie categories that will be used
-		</h2>
+		<h2 id="3-what-we-use">3. What we use</h2>
 		<p>
-			*(Section to complete/confirm at website launch, based on the
-			cookies actually used)*
+			The HikeTag website uses <strong>only strictly necessary storage</strong>.
+			We do not use analytics, advertising, or tracking cookies, neither our
+			own nor third-party ones.
 		</p>
 		<table>
 			<tr>
-				<th>Category</th>
-				<th>Purpose</th>
-				<th>Requires consent?</th>
+				<th>What we store</th>
+				<th>Why</th>
+				<th>Consent required?</th>
 			</tr>
 			<tr>
-				<td>Strictly necessary</td>
-				<td>
-					Core site functionality (e.g. security, session preferences)
-				</td>
-				<td>No</td>
+				<td>Your sign-in session</td>
+				<td>So you stay signed in across pages and visits</td>
+				<td>No (strictly necessary)</td>
 			</tr>
 			<tr>
-				<td>Functional</td>
-				<td>Remembering your preferences (e.g. language)</td>
-				<td>Yes</td>
-			</tr>
-			<tr>
-				<td>Analytics</td>
-				<td>Measuring traffic and how the site is used</td>
-				<td>Yes</td>
-			</tr>
-			<tr>
-				<td>Marketing</td>
-				<td>No targeted advertising is currently planned</td>
-				<td>Yes, if enabled in the future</td>
+				<td>Your preferences (e.g. theme, filters, notices you closed)</td>
+				<td>So the site looks the way you left it</td>
+				<td>No (explicitly requested by you when using the feature)</td>
 			</tr>
 		</table>
+		<p>
+			Maps on the website are loaded from Mapy.com and OpenStreetMap; like
+			any website, they receive your browser's IP address in order to send
+			you the map images.
+		</p>
 		<h2 id="4-how-you-control-your-preferences">
 			4. How you control your preferences
 		</h2>
 		<p>
-			Once the website is live, on your first visit you will see a
-			cookie-consent banner, letting you accept, decline, or customize
-			non-essential cookie categories, as required by applicable Romanian
-			law (Law No. 506/2004 on the processing of personal data and the
-			protection of privacy in the electronic communications sector, as
-			amended).
+			Because we only use strictly necessary storage, under Romanian Law
+			No. 506/2004 no consent banner is required. If we ever add cookies
+			that are not strictly necessary (e.g. analytics), we will update this
+			policy and ask for your consent first.
 		</p>
 		<p>
-			You can also control or delete cookies from your browser settings at
-			any time.
+			You can delete the data stored by the site at any time from your
+			browser settings; you will be signed out and your preferences will be
+			reset.
 		</p>
 		<h2 id="5-relationship-to-the-privacy-policy">
 			5. Relationship to the Privacy Policy
 		</h2>
 		<p>
-			This policy supplements the HikeTag
+			This policy complements the HikeTag
 			<a href="01-privacy-policy.html">Privacy Policy</a>, which describes
-			the data collected through the mobile app.
+			all data collected through the app and the website.
 		</p>
 		<h2 id="6-contact">6. Contact</h2>
 		<p><strong>Email: hiketag@gmail.com</strong></p>

@@ -69,24 +69,39 @@
 		</style>
 	</head>
 	<body>
+		<!-- Deschisă din formularul de cont de pe site (?din=aplicatie): buton care închide fila și te întoarce la formular. -->
+		<a id="back-to-app" href="https://www.hiketag.ro/" style="display:none;margin:0 0 14px;padding:8px 14px;border-radius:10px;background:#0d5747;color:#fff;font-weight:700;font-size:14px;text-decoration:none">← Back to HikeTag</a>
+		<script>
+			(function () {
+				var fromApp = /[?&]din=aplicatie/.test(location.search);
+				try {
+					if (fromApp) sessionStorage.setItem("hiketag_din_aplicatie", "1");
+					fromApp = fromApp || sessionStorage.getItem("hiketag_din_aplicatie") === "1";
+				} catch (e) {}
+				if (!fromApp) return;
+				var a = document.getElementById("back-to-app");
+				a.style.display = "inline-block";
+				a.addEventListener("click", function (ev) {
+					ev.preventDefault();
+					window.close();
+					setTimeout(function () { location.href = "https://www.hiketag.ro/"; }, 300);
+				});
+			})();
+		</script>
 		<a class="back" href="../index.html">← All documents</a>
 		<h1 id="privacy-policy-hiketag">Privacy Policy — HikeTag</h1>
-		<p><strong>Last updated:</strong> August 3, 2026</p>
+		<p><strong>Last updated:</strong> October 23, 2026</p>
 		<h2 id="1-who-we-are">1. Who we are</h2>
 		<p>
-			HikeTag ("we", "the app") is a mobile application that lets users in
-			Romania organize, discover, and join hiking trips, mountain
+			HikeTag ("we", "the app") is a mobile application and a website
+			(<a href="https://www.hiketag.ro">www.hiketag.ro</a>) that let users
+			in Romania organize, discover, and join hiking trips, mountain
 			excursions, and other outdoor events together with other users.
+			Everything below about "the app" also applies to the website.
 		</p>
 		<p>The data controller for HikeTag is:</p>
 		<p><strong>Alexandru Tabara, private individual</strong></p>
-		<p>
-			Address:
-			<strong
-				>Bulevardul Nicolae Grigorescu nr. 2, bloc W1, Bucharest,
-				Romania</strong
-			>
-		</p>
+		<p>Location: <strong>Bucharest, Romania</strong></p>
 		<p>Data protection contact email: <strong>hiketag@gmail.com</strong></p>
 		<p>
 			This policy applies to anyone using the HikeTag app in Romania. The
@@ -98,10 +113,17 @@
 		<ul>
 			<li>Name</li>
 			<li>Email address</li>
-			<li>Gender</li>
-			<li>Date of birth</li>
+			<li>Password (stored only in encrypted form, by our authentication provider)</li>
+			<li>
+				Gender (woman, man, or "Prefer not to say") — also used to show or
+				hide events marked "women only" / "men only"
+			</li>
+			<li>
+				Year of birth — used to check the minimum age; your age is hidden
+				by default and shown to others only if you choose to
+			</li>
 			<li>Profile description/bio</li>
-			<li>Profile picture (avatar)</li>
+			<li>Profile photos and cover photo</li>
 		</ul>
 		<h3 id="22-content-you-create">2.2 Content you create</h3>
 		<ul>
@@ -111,8 +133,18 @@
 			</li>
 			<li>Voice messages (requires microphone access)</li>
 			<li>Photos attached to chats or events</li>
-			<li>Reviews given to or received from other participants</li>
+			<li>
+				Reviews given to or received from other participants; on the
+				reviewed person's profile they appear only as an average, without
+				the reviewer's name
+			</li>
+			<li>Votes you give for other participants' badges</li>
 			<li>Reports submitted about other users (reason, description)</li>
+			<li>
+				Feedback messages you send us, including attached photos, videos,
+				or PDF files
+			</li>
+			<li>The text you search for when choosing a place or route on the map</li>
 		</ul>
 		<h3 id="23-your-location--a-special-note">
 			2.3 Your location — a special note
@@ -178,18 +210,37 @@
 		<ul>
 			<li>Your friends list and sent/received friend requests</li>
 			<li>Events you join, organize, or mark as favorites</li>
-			<li>Badges earned in the app</li>
+			<li>Badges, experience points (XP), and your level in the app</li>
 			<li>
 				A log of your relevant actions in the app ("Your Activity"),
 				visible only to you
+			</li>
+			<li>
+				Whether you are online and when you have read a message ("Seen"),
+				visible to the people you talk to
 			</li>
 		</ul>
 		<h3 id="26-technical-data">2.6 Technical data</h3>
 		<ul>
 			<li>
 				Data generated automatically by the app's operation (e.g.
-				technical error logs), to the extent needed for the proper
-				functioning and security of the service
+				technical error logs, IP address, app version, and device type),
+				to the extent needed for the proper functioning and security of
+				the service
+			</li>
+			<li>
+				On the website, information kept in your browser (local storage),
+				strictly needed to keep you signed in and to remember your
+				preferences — see the <a href="05-cookie-policy.html">Cookie Policy</a>
+			</li>
+		</ul>
+		<h3 id="27-donations">2.7 Donations</h3>
+		<ul>
+			<li>
+				If you choose to support the project with a donation, payment
+				takes place on the Revolut page, not in the app. Your card details
+				never reach us; we only see what Revolut sends us about the
+				payment (usually the amount and the donor's display name).
 			</li>
 		</ul>
 		<h2 id="3-why-we-use-your-data-purpose-and-legal-basis">
@@ -237,16 +288,27 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Improving the app</td>
-				<td>Technical data, activity log</td>
+				<td>Improving the app and fixing errors</td>
+				<td>Technical data, activity log, feedback</td>
 				<td>Our legitimate interest</td>
+			</tr>
+			<tr>
+				<td>Searching places on the map and event weather</td>
+				<td>Search text, event coordinates</td>
+				<td>Performance of a contract</td>
+			</tr>
+			<tr>
+				<td>Receiving donations</td>
+				<td>Payment data sent by Revolut</td>
+				<td>Your consent (donations are voluntary)</td>
 			</tr>
 		</table>
 		<p>
-			We do not use your data for targeted advertising, we do not sell
-			data to third parties, and at the time of writing, the app
-			<strong>has no form of monetization</strong> (no ads, no payments,
-			no subscriptions).
+			We do not use your data for targeted advertising and we do not sell
+			data to third parties. The app has no ads, subscriptions, or in-app
+			payments. The only money involved is voluntary donations, made on
+			the Revolut page, and the prices that organizers of commercial
+			events display and collect directly, outside the app.
 		</p>
 		<h2 id="4-who-we-share-data-with">4. Who we share data with</h2>
 		<p>
@@ -258,8 +320,33 @@
 				providers</strong
 			>, who process data on our behalf, strictly for the purposes
 			described in this policy, under contracts requiring confidentiality
-			and security obligations equivalent to our own.
+			and security obligations equivalent to our own. The main providers
+			are:
 		</p>
+		<ul>
+			<li>
+				<strong>Contabo</strong> (Germany) — the server running the app
+				and the technical error log;
+			</li>
+			<li>
+				<strong>Supabase</strong> — the database, authentication (account
+				and password), and storage of photos and voice messages;
+			</li>
+			<li>
+				<strong>Google Firebase</strong> and the Apple and Google
+				notification services — delivering push notifications;
+			</li>
+			<li>
+				<strong>Mapy.com</strong> (Czech Republic) and
+				<strong>Photon / OpenStreetMap</strong> (Germany) — maps and place
+				search; they receive the search text, not your name or account;
+			</li>
+			<li>
+				<strong>MET Norway</strong> (Norway) — weather forecasts; it only
+				receives the event's coordinates, no data about you;
+			</li>
+			<li><strong>Revolut</strong> — only for donations, if you choose to donate.</li>
+		</ul>
 		<p>
 			Data you voluntarily share (your position on the map, messages,
 			reviews) is also visible to the <strong>other users</strong> you've
@@ -267,31 +354,24 @@
 			is not "sharing with third parties", it's the app's core
 			functionality, which you explicitly chose to use.
 		</p>
-		<p>
-			The app's technical infrastructure may change over time (for
-			example, moving hosting from a development environment to a
-			production platform). We will update this policy if the nature or
-			purpose of data sharing with providers changes, but an update is not
-			required for a mere change of technical provider, as long as the
-			purposes remain as described above.
-		</p>
 		<h2 id="5-transfers-outside-romaniathe-eu">
 			5. Transfers outside Romania/the EU
 		</h2>
 		<p>
 			Some of the third-party providers mentioned in section 4 may process
 			or store data on servers located outside Romania or the European
-			Economic Area. In such cases, we ensure the transfer relies on
-			appropriate safeguards (e.g. Standard Contractual Clauses approved
-			by the European Commission) or another mechanism recognized under
-			data protection law.
+			Economic Area (for example, the push notification services of
+			Google, Apple, and Firebase, in the USA). In such cases, we ensure
+			the transfer relies on appropriate safeguards (e.g. Standard
+			Contractual Clauses approved by the European Commission) or another
+			mechanism recognized under data protection law.
 		</p>
 		<h2 id="6-how-long-we-keep-data">6. How long we keep data</h2>
 		<ul>
 			<li>
 				<strong>Account and profile data</strong>: for as long as your
-				account is active, plus a reasonable period afterward, as needed
-				to resolve any disputes or legal obligations.
+				account exists. When you delete your account, it is deleted or
+				anonymized immediately (see section 9).
 			</li>
 			<li>
 				<strong>Location</strong>: only your last known position, for as
@@ -299,20 +379,28 @@
 				expires or is stopped.
 			</li>
 			<li>
-				<strong>Messages and content</strong>: for as long as your
-				account and/or the related event remain active, unless the law
-				requires a different period.
+				<strong>Messages, reviews, and events</strong>: for as long as the
+				related event or conversation exists, because they are also part
+				of the other participants' history.
 			</li>
 			<li>
-				<strong>User reports</strong>: for as long as needed to
-				investigate and resolve the report, plus a reasonable period for
-				moderation history.
+				<strong>Photos, videos, and files in group chats</strong>: deleted
+				automatically 7 days after the event ends (those sent after the
+				end, 7 days after being sent). In private messages they remain
+				until you delete them.
+			</li>
+			<li>
+				<strong>User reports and feedback</strong>: for as long as needed
+				to investigate and resolve them.
+			</li>
+			<li>
+				<strong>Technical and error logs</strong>: at most 90 days.
 			</li>
 		</ul>
 		<p>
-			When your account is deleted, your data is deleted or anonymized,
-			except for data we are legally required to retain for a further
-			period.
+			When your account is deleted, your profile data is deleted and the
+			content you created remains anonymized, except for data we are
+			legally required to retain for a further period.
 		</p>
 		<h2 id="7-data-security">7. Data security</h2>
 		<p>
@@ -363,12 +451,18 @@
 		</ul>
 		<h2 id="9-account-deletion">9. Account deletion</h2>
 		<p>
-			The app does not currently have an in-app self-service button to
-			delete your account. If you want your account and associated data
-			deleted, you can send a request to the contact address in section
-			1/13, and your request will be resolved within a reasonable time, in
-			accordance with the law. We intend to add an in-app self-deletion
-			option in the future.
+			You can delete your account at any time directly in the app
+			(Profile → Settings → "Delete account permanently") or, without the
+			app, by email — see the dedicated page:
+			<a href="../stergere-cont.html">HikeTag account deletion</a>.
+		</p>
+		<p>
+			On deletion, your name, email, photos, description, year of birth,
+			and gender are removed. Events, messages, and reviews you left remain
+			visible to the other participants, but under the name "Deleted
+			user", and can no longer be linked to you. Upcoming events you were
+			organizing are cancelled, and your places at other people's events
+			are released.
 		</p>
 		<h2 id="10-minors">10. Minors</h2>
 		<p>
@@ -396,12 +490,7 @@
 			can write to us at:
 		</p>
 		<p><strong>Email: hiketag@gmail.com</strong></p>
-		<p>
-			<strong
-				>Address: Bulevardul Nicolae Grigorescu nr. 2, bloc W1,
-				Bucharest, Romania</strong
-			>
-		</p>
+		<p><strong>Location: Bucharest, Romania</strong></p>
 		<footer>
 			HikeTag este operată de Alexandru Tabara, persoană fizică.
 		</footer>

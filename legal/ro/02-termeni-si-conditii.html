@@ -69,16 +69,37 @@
 		</style>
 	</head>
 	<body>
+		<!-- Deschisă din formularul de cont de pe site (?din=aplicatie): buton care închide fila și te întoarce la formular. -->
+		<a id="back-to-app" href="https://www.hiketag.ro/" style="display:none;margin:0 0 14px;padding:8px 14px;border-radius:10px;background:#0d5747;color:#fff;font-weight:700;font-size:14px;text-decoration:none">← Înapoi la HikeTag</a>
+		<script>
+			(function () {
+				var fromApp = /[?&]din=aplicatie/.test(location.search);
+				try {
+					if (fromApp) sessionStorage.setItem("hiketag_din_aplicatie", "1");
+					fromApp = fromApp || sessionStorage.getItem("hiketag_din_aplicatie") === "1";
+				} catch (e) {}
+				if (!fromApp) return;
+				var a = document.getElementById("back-to-app");
+				a.style.display = "inline-block";
+				a.addEventListener("click", function (ev) {
+					ev.preventDefault();
+					window.close();
+					setTimeout(function () { location.href = "https://www.hiketag.ro/"; }, 300);
+				});
+			})();
+		</script>
 		<a class="back" href="../index.html">← Toate documentele</a>
 		<h1 id="termeni-și-condiții-hiketag">Termeni și Condiții — HikeTag</h1>
-		<p><strong>Ultima actualizare:</strong> 3 august 2026</p>
+		<p><strong>Ultima actualizare:</strong> 23 octombrie 2026</p>
 		<h2 id="1-cine-suntem-și-acceptarea-termenilor">
 			1. Cine suntem și acceptarea termenilor
 		</h2>
 		<p>
-			HikeTag este o aplicație mobilă operată de
+			HikeTag este o aplicație mobilă și un site web
+			(www.hiketag.ro) operate de
 			<strong>Alexandru Tabara, persoană fizică</strong> ("noi",
-			"HikeTag"), disponibilă utilizatorilor din România.
+			"HikeTag"), disponibile utilizatorilor din România. Tot ce scrie
+			mai jos despre „aplicație” se aplică și site-ului.
 		</p>
 		<p>
 			Prin crearea unui cont sau prin folosirea aplicației, confirmi că ai
@@ -162,8 +183,9 @@
 				aplicație sau la evenimente;
 			</li>
 			<li>
-				folosești aplicația pentru scopuri comerciale neautorizate
-				(publicitate, vânzări) fără acordul nostru;
+				folosești aplicația pentru publicitate sau vânzări în afara
+				evenimentelor comerciale descrise la secțiunea 6 (ex. reclame în
+				chat, mesaje nesolicitate către alți utilizatori);
 			</li>
 			<li>
 				încarci conținut (fotografii, mesaje, mesaje vocale) asupra
@@ -222,7 +244,34 @@
 				incidente survenite în timpul transportului organizat între
 				utilizatori.
 			</li>
+			<li>
+				<strong>Evenimente comerciale.</strong> Organizatorii (persoane
+				sau firme) pot publica evenimente cu plată, marcate ca atare, cu
+				prețul afișat sau cu mențiunea că prețul se comunică separat.
+				Plata se face direct către organizator, în afara aplicației;
+				HikeTag nu încasează, nu procesează și nu garantează nicio plată
+				și nu este parte la înțelegerea dintre organizator și participanți.
+				Organizatorul unui eveniment comercial este singurul responsabil
+				pentru autorizațiile, licențele, asigurările și obligațiile fiscale
+				cerute de lege pentru activitatea lui (ex. licență de agenție de
+				turism, atestat de ghid montan) și pentru respectarea drepturilor
+				consumatorilor.
+			</li>
+			<li>
+				<strong>Evenimente pentru un singur gen.</strong> Un organizator
+				poate marca un eveniment „doar pentru femei” sau „doar pentru
+				bărbați”, de exemplu din motive de confort sau de siguranță.
+				Aceste evenimente sunt vizibile și deschise doar utilizatorilor de
+				genul respectiv, așa cum este trecut în profil.
+			</li>
 		</ul>
+		<h3 id="6-donatii">Donații</h3>
+		<p>
+			Poți susține voluntar proiectul printr-o donație, pe pagina
+			Revolut. Donația este o contribuție benevolă: nu îți oferă nicio
+			funcție, avantaj sau tratament diferit în aplicație și nu se
+			returnează, cu excepția cazurilor prevăzute de lege.
+		</p>
 		<h2 id="7-locația-și-siguranța">7. Locația și siguranța</h2>
 		<p>
 			Partajarea locației este o funcție opțională, activată exclusiv cu
@@ -289,9 +338,10 @@
 			11. Suspendarea sau încetarea contului
 		</h2>
 		<p>
-			Poți înceta oricând să folosești aplicația. Ștergerea definitivă a
-			contului și a datelor asociate se face în prezent prin cerere
-			trimisă la adresa de contact din secțiunea 16, conform
+			Poți înceta oricând să folosești aplicația. Îți poți șterge
+			definitiv contul direct din aplicație (Profil → Setări → „Șterge
+			definitiv contul”) sau printr-o cerere trimisă la adresa de contact
+			din secțiunea 16, conform
 			<a href="../privacy-policy.html#9-ștergerea-contului"
 				>Politicii de Confidențialitate</a
 			>.
@@ -320,9 +370,9 @@
 			România.
 		</p>
 		<p>
-			Dacă ești consumator, ai de asemenea posibilitatea de a folosi
-			platforma europeană de soluționare online a litigiilor (ODR):
-			https://ec.europa.eu/consumers/odr.
+			Dacă ești consumator, te poți adresa și Autorității Naționale
+			pentru Protecția Consumatorilor (ANPC),
+			<a href="https://anpc.ro" target="_blank" rel="noopener">anpc.ro</a>.
 		</p>
 		<h2 id="14-separabilitate">14. Separabilitate</h2>
 		<p>
@@ -351,10 +401,7 @@
 		<h2 id="16-contact">16. Contact</h2>
 		<p><strong>Email: hiketag@gmail.com</strong></p>
 		<p>
-			<strong
-				>Adresă: Bulevardul Nicolae Grigorescu nr. 2, bloc W1,
-				București, România</strong
-			>
+			<strong>Localitate: București, România</strong>
 		</p>
 		<footer>
 			HikeTag este operată de Alexandru Tabara, persoană fizică.

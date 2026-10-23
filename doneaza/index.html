@@ -3,12 +3,12 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Susține HikeTag</title>
+		<title>Susține HikeTaG</title>
 		<meta
 			name="description"
 			content="HikeTag e construit de un singur om, fără firmă și fără investitori. Dacă îți e drag, poți susține comunitatea."
 		/>
-		<meta property="og:title" content="Susține comunitatea HikeTag" />
+		<meta property="og:title" content="Susține comunitatea HikeTaG" />
 		<meta
 			property="og:description"
 			content="Fiecare pas contează. Construiește comunitatea cu noi!"
@@ -418,6 +418,49 @@
 				font-size: 13px;
 				text-align: center;
 			}
+
+			/* Telefon (Alex, 23 oct 2026): începutul scrisorii „Un gând de la Alex și Stelian” să se vadă
+			   din prima, fără derulare. Poza rămâne întreagă (are textul și butonul desenate pe ea) —
+			   strângem doar golurile din jurul ei și din caseta cu Revolut. */
+			@media (max-width: 480px) {
+				.wrap {
+					padding-top: 10px;
+				}
+				.back {
+					margin-bottom: 8px;
+					padding: 6px 12px 6px 8px;
+					font-size: 13px;
+				}
+				.give {
+					margin: -26px 6px 0;
+					padding: 14px 16px 14px;
+				}
+				.eyebrow {
+					padding: 4px 10px;
+					font-size: 11px;
+				}
+				.give h1 {
+					margin: 6px 0 4px;
+					font-size: 22px;
+				}
+				.give .give-sub {
+					margin-bottom: 10px;
+					font-size: 13.5px;
+					line-height: 1.45;
+				}
+				.btn {
+					padding: 11px 18px;
+					font-size: 15px;
+				}
+				.safe {
+					margin-top: 8px;
+					font-size: 12px;
+				}
+				.letter {
+					margin-top: 16px;
+					padding: 20px 18px 18px;
+				}
+			}
 		</style>
 	</head>
 	<body>
@@ -516,6 +559,12 @@
 					cu care să ieși pe munte, pe bicicletă, la alergare sau la o
 					tură prin oraș — și să nu mai stai acasă doar pentru că n-ai cu
 					cine pleca.
+				</p>
+				<p>
+					Dar o ieșire în natură poate fi și mai mult decât atât. Prin
+					HikeTag poți găsi sau organiza acțiuni de voluntariat —
+					ecologizări, plantări de copaci, ajutor pentru comunitate — și
+					poți lăsa locurile mai frumoase decât le-ai găsit.
 				</p>
 				<p>
 					Nu e o firmă în spate și nici investitori. Suntem noi doi, multe
@@ -686,6 +735,19 @@
 						: Promise.reject(new Error("HTTP " + r.status));
 				})
 				.then(function (cfg) {
+					// Poza mare pusă din admin (Admin → Moderare → Banner de donații → Poze). Fără ea, rămâne
+					// poza de pe site. Doar adrese https de la Supabase — nu punem orice adresă venită de afară.
+					var img = cfg && cfg.donationPageImage;
+					if (img && typeof img.url === "string" && /^https:\/\/[a-z0-9]+\.supabase\.co\//.test(img.url)) {
+						var hero = document.querySelector(".hero img");
+						if (hero) {
+							hero.src = img.url;
+							if (img.width > 0 && img.height > 0) {
+								hero.setAttribute("width", img.width);
+								hero.setAttribute("height", img.height);
+							}
+						}
+					}
 					var url = cfg && cfg.donationUrl;
 					if (!url) {
 						statusEl.textContent =

@@ -80,6 +80,25 @@
 				display: none !important;
 			}
 
+			/* ── Înapoi: în aplicație (telefon) sau la hiketag.ro (calculator) ── */
+			.back {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				margin: 0 0 12px;
+				padding: 8px 14px 8px 10px;
+				border-radius: 999px;
+				background: var(--surface);
+				box-shadow: var(--shadow);
+				color: var(--green);
+				font-size: 14px;
+				font-weight: 700;
+				text-decoration: none;
+			}
+			.back:hover {
+				transform: translateX(-2px);
+			}
+
 			/* ── Sus: desenul ── */
 			.hero {
 				display: block;
@@ -97,7 +116,7 @@
 			.give {
 				position: relative;
 				margin: -34px 12px 0;
-				padding: 26px 22px 24px;
+				padding: 20px 20px 18px;
 				border-radius: 24px;
 				background:
 					radial-gradient(
@@ -122,16 +141,17 @@
 				border-radius: 999px;
 			}
 			.give h1 {
-				font-size: clamp(28px, 6.5vw, 38px);
+				font-size: clamp(24px, 5.5vw, 30px);
 				line-height: 1.15;
-				letter-spacing: -0.6px;
-				margin: 12px 0 8px;
+				letter-spacing: -0.5px;
+				margin: 10px 0 6px;
 			}
 			.give .give-sub {
-				margin: 0 auto 20px;
-				max-width: 440px;
+				margin: 0 auto 14px;
+				max-width: 420px;
 				color: rgba(255, 255, 255, 0.88);
-				font-size: 16px;
+				font-size: 14.5px;
+				line-height: 1.5;
 			}
 			.btn {
 				display: inline-flex;
@@ -139,14 +159,14 @@
 				justify-content: center;
 				gap: 10px;
 				width: 100%;
-				max-width: 380px;
-				padding: 16px 24px;
+				max-width: 340px;
+				padding: 13px 22px;
 				border-radius: 999px;
 				border: none;
 				background: #fff;
 				color: #0d5747;
 				font: inherit;
-				font-size: 17px;
+				font-size: 16px;
 				font-weight: 800;
 				text-decoration: none;
 				cursor: pointer;
@@ -166,22 +186,24 @@
 				flex-shrink: 0;
 			}
 			.btn.ghost {
-				margin-top: 10px;
+				margin-top: 8px;
 				background: transparent;
 				color: #fff;
 				border: 1.5px solid rgba(255, 255, 255, 0.45);
 				box-shadow: none;
-				font-size: 15px;
+				font-size: 14px;
 				font-weight: 700;
-				padding: 12px 20px;
+				padding: 10px 18px;
 			}
 			.btn.ghost:hover {
 				background: rgba(255, 255, 255, 0.1);
 				transform: none;
 			}
 			.safe {
-				margin: 14px 0 0;
-				font-size: 13px;
+				margin: 10px auto 0;
+				max-width: 420px;
+				font-size: 12.5px;
+				line-height: 1.45;
 				color: rgba(255, 255, 255, 0.78);
 			}
 			.status {
@@ -190,20 +212,30 @@
 				padding: 10px 0;
 			}
 			.qr-wrap {
-				margin-top: 18px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 14px;
+				margin-top: 14px;
+			}
+			.qr-wrap[hidden] {
+				display: none;
 			}
 			.qr-wrap p {
-				margin: 0 0 10px;
-				font-size: 13.5px;
-				color: rgba(255, 255, 255, 0.8);
+				margin: 0;
+				max-width: 150px;
+				text-align: left;
+				font-size: 13px;
+				line-height: 1.4;
+				color: rgba(255, 255, 255, 0.82);
 			}
 			.qr-wrap img {
-				border-radius: 16px;
-				padding: 10px;
+				border-radius: 12px;
+				padding: 6px;
 				background: #fff;
 			}
 
-			/* ── Scrisoarea lui Alex: ca o carte poștală de pe traseu ── */
+			/* ── Scrisoarea lui Alex și Stelian: ca o carte poștală de pe traseu ── */
 			.letter {
 				position: relative;
 				margin: 30px 0 0;
@@ -247,7 +279,8 @@
 				background: linear-gradient(140deg, #1e7a48, #0d5747);
 				color: #fff;
 				font-weight: 800;
-				font-size: 19px;
+				font-size: 15px;
+				letter-spacing: -0.5px;
 			}
 			.from b {
 				display: block;
@@ -389,6 +422,13 @@
 	</head>
 	<body>
 		<div class="wrap">
+			<!-- Pe telefon pagina se deschide din aplicație, în browser: butonul redeschide HikeTag (hiketag://).
+			     Pe calculator nu e aplicație, deci duce la site. Textul și adresa se aleg în scriptul de jos. -->
+			<a id="back" class="back" href="https://www.hiketag.ro/">
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+					stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+				<span id="back-text">Înapoi la HikeTag</span>
+			</a>
 			<!-- Poza are desenat un buton „Susține comunitatea” — apăsat, duce la caseta cu Revolut. -->
 			<a class="hero" href="#sustine" aria-label="Mergi la susținere">
 				<img
@@ -456,19 +496,19 @@
 					<img
 						id="qr-img"
 						alt="Cod QR pentru susținere"
-						width="180"
-						height="180"
+						width="96"
+						height="96"
 					/>
 				</div>
 			</section>
 
-			<section class="letter" aria-label="Un gând de la Alex">
+			<section class="letter" aria-label="Un gând de la Alex și Stelian">
 				<div class="stamp" aria-hidden="true">⛰️</div>
 				<div class="from">
-					<div class="avatar" aria-hidden="true">A</div>
+					<div class="avatar" aria-hidden="true">A&amp;S</div>
 					<div>
-						<b>Un gând de la Alex</b>
-						<span>cel care construiește HikeTag</span>
+						<b>Un gând de la Alex și Stelian</b>
+						<span>cei care construiesc HikeTag</span>
 					</div>
 				</div>
 				<p>
@@ -478,17 +518,17 @@
 					cine pleca.
 				</p>
 				<p>
-					Nu e o firmă în spate și nici investitori. Sunt eu, multe ore de
-					muncă și o comunitate care crește cu fiecare tură.
+					Nu e o firmă în spate și nici investitori. Suntem noi doi, multe
+					ore de muncă și o comunitate care crește cu fiecare tură.
 				</p>
 				<p>
 					Dacă aplicația ți-a adus un drum frumos sau oameni noi alături și
-					vrei să dai ceva înapoi, mă bucur enorm. Iar dacă nu, e perfect
+					vrei să dai ceva înapoi, ne bucurăm enorm. Iar dacă nu, e perfect
 					în regulă — faptul că ești aici contează deja.
 				</p>
 				<p class="bye">
 					Ne vedem pe traseu,
-					<span class="signature">Alex</span>
+					<span class="signature">Alex &amp; Stelian</span>
 				</p>
 			</section>
 
@@ -588,6 +628,11 @@
 			// din admin NU cade pe ea: atunci pagina spune ca metoda nu e configurata.
 			var FALLBACK_URL = "https://revolut.me/alexanost3";
 
+			if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+				document.getElementById("back").href = "hiketag://";
+				document.getElementById("back-text").textContent = "Înapoi în aplicație";
+			}
+
 			var statusEl = document.getElementById("status");
 			var btn = document.getElementById("revolut-btn");
 			var copyBtn = document.getElementById("copy-btn");
@@ -605,7 +650,7 @@
 				// QR-ul e util doar pe ecran mare — pe telefon nu ai cum sa-ti scanezi propriul ecran.
 				if (window.matchMedia("(min-width: 700px)").matches) {
 					qrImg.src =
-						"https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=" +
+						"https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&data=" +
 						encodeURIComponent(url);
 					qr.hidden = false;
 				}
